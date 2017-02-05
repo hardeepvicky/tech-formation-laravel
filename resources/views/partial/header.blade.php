@@ -35,9 +35,11 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-default">                                
                     <li>
+                        @if (can("user/password/change"))
                         <a href="{{ url("user/password/change") }}">
                             <i class="icon-lock"></i> Change Password
                         </a>
+                        @endif
                     </li>     
                     <li>
                         <a href="{{ url("logout") }}">

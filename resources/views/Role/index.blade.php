@@ -53,18 +53,22 @@ $records = $summary->toArray()["data"];
                                 <td> {{ $record['id'] }} </td>
                                 <td> {{ $record['name'] }} </td>
                                 <td>
+                                    @if (can("user/{" .$routePrefix . "}/edit")): ?>
                                     <a title="Edit" href="{{ url($routePrefix . "/" . $record['id'] . "/edit") }}" class="btn btn-icon-only blue">
                                         <i class=" fa fa-edit "></i> 
                                     </a>
+                                    @endif
                                     
-                                    {{ Form::open([ 'method' => 'DELETE', 'route' => [ $routePrefix . '.destroy', $record['id'] ], "class" => "inline" ]) }}
+                                    @if (can("user/{" . $routePrefix . "}", "DELETE")): ?>
+                                        {{ Form::open([ 'method' => 'DELETE', 'route' => [ $routePrefix . '.destroy', $record['id'] ], "class" => "inline" ]) }}
 
-                                        <button class="btn btn-icon-only red" data-toggle="confirmation" data-singleton="true" data-popout="true"
-                                                data-original-title="Are you sure to Delete ?">
-                                            <i class="fa fa-times "></i> 
-                                        </button>
+                                            <button class="btn btn-icon-only red" data-toggle="confirmation" data-singleton="true" data-popout="true"
+                                                    data-original-title="Are you sure to Delete ?">
+                                                <i class="fa fa-times "></i> 
+                                            </button>
 
-                                    {{ Form::close()}}
+                                        {{ Form::close()}}
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

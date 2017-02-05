@@ -27,7 +27,7 @@ class PermissionController extends AppController
     {
         $this->pageTitle = "Permissions";
         
-        $this->params['role_list'] = Role::pluck("name", "id")->toArray();
+        $this->params['role_list'] = Role::orderBy('id', 'ASC')->pluck("name", "id")->toArray();
         $permissions = Permission::get()->toArray();
         
         $temp = RolePermission::get()->toArray();

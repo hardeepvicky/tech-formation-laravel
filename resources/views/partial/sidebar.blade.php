@@ -31,7 +31,7 @@ $menus = config("menus");
                 <ul class="sub-menu">
                     @foreach($menu['links'] as $link)
                     <?php $active = $link["route"] == $route || in_array($route, $link["other_routes"]); ?>
-                        <?php if (!isset($routes_permitted['GET']) || in_array($link["route"], $routes_permitted["GET"])): ?>
+                        <?php if (!isset($routes_permitted) || (isset($routes_permitted["GET"]) && in_array($link["route"], $routes_permitted["GET"]))): ?>
                             <li class="nav-item {{ $active ? "active open" : "" }}">
                                 <a href="{{ url($link["route"]) }}" class="nav-link">
                                     <i class="{{ $link["icon_class"] }}"></i>
@@ -46,3 +46,7 @@ $menus = config("menus");
         @endforeach
     </ul>   
 </div>
+
+<script type="text/javascript">
+    $("ul.sub-menu:not(:has(li))").parent().remove();
+</script>

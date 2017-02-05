@@ -143,7 +143,19 @@ Form::macro('myGroup', function($type, $title, $name, $attr, $errors = null)
     return $html;
 });
 
-function is_permitted($route)
+function can($route, $method = "GET")
 {
-    return (isset($routes_permitted) || (isset($routes_permitted["GET"]) && in_array($route, $routes_permitted["GET"])));
+    $can = true;
+    
+    if (Session::has(ACL_KEY))
+    {
+        $list = Session::get(ACL_KEY);
+
+        if (!isset($list[$method]) || !in_array($route, $list[$method]))
+        {
+            $can = false;
+        }
+    }
+
+    return $can;
 }

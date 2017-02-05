@@ -64,14 +64,14 @@ $records = $summary->toArray()["data"];
                                 <td> {{ $record['first_name'] }} </td>
                                 <td> {{ $record['last_name'] }} </td>
                                 <td>
-                                    <?php if (!isset($routes_permitted) || (isset($routes_permitted["GET"]) && in_array('user/{ID}/active/toggle/{v}', $routes_permitted["GET"]))): ?>
+                                    <?php if (can('user/{ID}/active/toggle/{v}')): ?>
                                         <a class="ajax-toggle-status" href='{{ url($routePrefix . "/" . $record["id"] . "/active/toggle/{v}") }}' data-value="{{ $record['is_active'] ? 1 : 0 }}" >
                                             <i class="font-lg {{ $record['is_active'] ? "fa fa-check-circle font-green-meadow": "fa fa-times-circle font-red-sunglo" }}"></i>
                                         </a>
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <?php if (!isset($routes_permitted) || (isset($routes_permitted["GET"]) && in_array('user/{user}/edit', $routes_permitted["GET"]))): ?>
+                                    <?php if (can('user/{user}/edit')): ?>
                                         <a title="Edit" href="{{ url($routePrefix . "/" . $record['id'] . "/edit") }}" class="btn btn-icon-only blue">
                                             <i class=" fa fa-edit "></i> 
                                         </a>
