@@ -10,6 +10,7 @@
         "laravelcollective/html": "^5.2.0"
     },
     "require-dev": {        
+        "kyslik/column-sortable": "5.3.*"
     },
     "autoload": {
         "classmap": [

@@ -36,8 +36,7 @@ class LogController extends AppController
             $model = new WebServiceLog();
         }
         
-        $summary = $model->orderBy($this->pagination["order"]["field"], $this->pagination["order"]["dir"])
-            ->paginate($this->pagination["limit"]);
+        $summary = $model->sortable()->paginate($this->pagination["limit"]);
         
         $web_service_types = array(
             1 => "Login"

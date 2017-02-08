@@ -9,7 +9,9 @@ class User extends AppModel implements Authenticatable
 {
     use SoftDeletes;
     
-    protected $fillable = ["role_id", 'first_name', "last_name", "email", "password", "password_confirmation", "remember_token", "permissions"];
+    protected $fillable = ["role_id", 'first_name', "last_name", "email", "password", "password_confirmation", "remember_token", "permissions", 'is_active'];
+    
+    public $sortable = ['email', 'first_name', "last_name", "is_active"];
     
     public function beforeSave()
     {

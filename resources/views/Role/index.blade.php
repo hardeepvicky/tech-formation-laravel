@@ -43,7 +43,7 @@ $records = $summary->toArray()["data"];
                     <thead>
                         <tr class="center">
                             <th> # </th>
-                            <th> Name </th>
+                            <th> @sortablelink('name', 'Name')  </th>
                             <th> Action </th>
                         </tr>
                     </thead>
@@ -53,13 +53,13 @@ $records = $summary->toArray()["data"];
                                 <td> {{ $record['id'] }} </td>
                                 <td> {{ $record['name'] }} </td>
                                 <td>
-                                    @if (can("user/{" .$routePrefix . "}/edit")): ?>
+                                    @if (can("user/{" .$routePrefix . "}/edit"))
                                     <a title="Edit" href="{{ url($routePrefix . "/" . $record['id'] . "/edit") }}" class="btn btn-icon-only blue">
                                         <i class=" fa fa-edit "></i> 
                                     </a>
                                     @endif
                                     
-                                    @if (can("user/{" . $routePrefix . "}", "DELETE")): ?>
+                                    @if (can("user/{" . $routePrefix . "}", "DELETE"))
                                         {{ Form::open([ 'method' => 'DELETE', 'route' => [ $routePrefix . '.destroy', $record['id'] ], "class" => "inline" ]) }}
 
                                             <button class="btn btn-icon-only red" data-toggle="confirmation" data-singleton="true" data-popout="true"

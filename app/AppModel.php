@@ -4,6 +4,8 @@ use \Illuminate\Support\Facades\Auth;
 
 abstract class AppModel extends \Illuminate\Database\Eloquent\Model
 {
+    use \Kyslik\ColumnSortable\Sortable;
+    
     public static $snakeAttributes = false, $authUser = [];
     
     //format for saving in database

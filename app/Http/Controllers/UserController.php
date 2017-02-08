@@ -54,8 +54,7 @@ class UserController extends AppController
             $model = new User();
         }
         
-        $summary = $model->orderBy($this->pagination["order"]["field"], $this->pagination["order"]["dir"])
-            ->paginate($this->pagination["limit"]);
+        $summary = $model->sortable()->paginate($this->pagination["limit"]);
         
         $this->_setRoleList();
         

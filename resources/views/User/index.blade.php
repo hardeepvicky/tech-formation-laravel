@@ -47,11 +47,11 @@ $records = $summary->toArray()["data"];
                     <thead>
                         <tr class="center">
                             <th> # </th>
-                            <th> Email </th>
+                            <th> @sortablelink('email', 'Email') </th>
                             <th> Role </th>
-                            <th> First Name </th>
-                            <th> Last Name </th>
-                            <th> Active </th>
+                            <th> @sortablelink('first_name', 'First Name') </th>
+                            <th> @sortablelink('last_name', 'Last Name')  </th>
+                            <th> @sortablelink('is_active', 'Active') </th>
                             <th> Action </th>
                         </tr>
                     </thead>

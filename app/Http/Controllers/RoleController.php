@@ -39,8 +39,7 @@ class RoleController extends AppController
             $model = new Role();
         }
         
-        $summary = $model->orderBy($this->pagination["order"]["field"], $this->pagination["order"]["dir"])
-            ->paginate($this->pagination["limit"]);
+        $summary = $model->sortable()->paginate($this->pagination["limit"]);
         
         return $this->view(null, compact("summary"));
     }

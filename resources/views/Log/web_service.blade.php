@@ -48,8 +48,8 @@ $records = $summary->toArray()["data"];
                         <tr class="center">
                             <th> # </th>
                             <th> Type </th>
-                            <th> Time Taken (seconds) </th>
-                            <th> Status </th>
+                            <th> @sortablelink('execution_time', 'Time Taken (seconds)')  </th>
+                            <th> @sortablelink('status', 'Status') </th>
                         </tr>
                     </thead>
                     <tbody>

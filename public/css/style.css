@@ -21,6 +21,11 @@ table.summary tr.head, table.summary thead tr
     background-color: #337ab7;
 }
 
+table.summary tr.head *, table.summary thead tr *
+{
+    color : #FFF;
+}
+
 table.summary tr.center td, table.summary tr.center th
 {
     text-align: center;
