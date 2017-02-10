@@ -1,12 +1,11 @@
 <?php
-
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class WebServiceLog extends Model
+class WebServiceLog extends AppModel
 {
-    use \Kyslik\ColumnSortable\Sortable;
+    public $timestamps = false;
+    
+    protected $createdBy = false, $updatedBy = false, $deletedBy = false, $createdAt = true, $updatedAt = false, $deletedAt = false;
     
     public $sortable = ['execution_time'];
     

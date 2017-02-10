@@ -1,13 +1,12 @@
 <?php
 namespace App;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Hash;
 
 class User extends AppModel implements Authenticatable
 {
-    use SoftDeletes;
+    use \Illuminate\Database\Eloquent\SoftDeletes;
     
     protected $fillable = ["role_id", 'first_name', "last_name", "email", "password", "password_confirmation", "remember_token", "permissions", 'is_active'];
     

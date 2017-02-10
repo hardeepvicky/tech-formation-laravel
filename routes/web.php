@@ -1,9 +1,8 @@
 <?php
 //Routes for Web Services
-
 Route::group(['middleware' => ['api']], function() 
 {
-    Route::post('web-service/login', 'WebServiceController@Login');
+    Route::post('web-service', 'WebServiceController@index');
 });
 
 //Home Page
@@ -25,6 +24,10 @@ Route::group(['middleware' => "secure"], function ()
 {
     Route::resource("role", "RoleController");
     
+    Route::resource("email-placeholder", "EmailPlaceholderController");
+    Route::resource("email-template", "EmailTemplateController");
+    Route::get("email-log", "LogController@email_log");
+    
     Route::resource("permission", "permissionController");
     Route::get("permission/refresh/{All_delete}", "permissionController@refresh");
     
@@ -35,4 +38,6 @@ Route::group(['middleware' => "secure"], function ()
     
     Route::get("log/web-service", "LogController@web_service");
     Route::get("log/cron", "LogController@cron");
+    Route::get("log/email", "LogController@email_log");
+    Route::get("test_send_email", "EmailTemplateController@test_send_email");
 });

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c516b352fc863c01d20cbc33a385f98",
+    "content-hash": "cdfb4538bc6406f045aae97846a7e66c",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -304,6 +304,57 @@
                 "tokenizer"
             ],
             "time": "2016-12-07T09:37:55+00:00"
+        },
+        {
+            "name": "kyslik/column-sortable",
+            "version": "5.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kyslik/column-sortable.git",
+                "reference": "e0c1c2595cc04f43a8fae85ac10c78047df7212a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kyslik/column-sortable/zipball/e0c1c2595cc04f43a8fae85ac10c78047df7212a",
+                "reference": "e0c1c2595cc04f43a8fae85ac10c78047df7212a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "5.3.*",
+                "illuminate/support": "5.3.*",
+                "php": ">=5.6.4"
+            },
+            "require-dev": {
+                "orchestra/testbench": "3.3.*",
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "Kyslik\\ColumnSortable\\": "src/ColumnSortable/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Martin Kiesel",
+                    "email": "martin.kiesel@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Package for handling column sorting in Laravel 5",
+            "keywords": [
+                "column",
+                "laravel",
+                "one-to-one",
+                "sort",
+                "sortable",
+                "sorting"
+            ],
+            "time": "2017-01-24T11:02:59+00:00"
         },
         {
             "name": "laravel/framework",
@@ -747,16 +798,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "adf44419c0fc014a0f191db6f89d3e55d4211744"
+                "reference": "5b8182cc0abb4b0ff290ba9df6c0e1323286013a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/adf44419c0fc014a0f191db6f89d3e55d4211744",
-                "reference": "adf44419c0fc014a0f191db6f89d3e55d4211744",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/5b8182cc0abb4b0ff290ba9df6c0e1323286013a",
+                "reference": "5b8182cc0abb4b0ff290ba9df6c0e1323286013a",
                 "shasum": ""
             },
             "require": {
@@ -794,7 +845,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2016-12-06T11:30:35+00:00"
+            "time": "2017-02-03T21:57:31+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1220,7 +1271,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v3.2.2",
+            "version": "v3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -1881,6 +1932,87 @@
             "time": "2017-01-24T13:02:38+00:00"
         },
         {
+            "name": "tech-formation/php",
+            "version": "1.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hardeepvicky/tech-formation-php.git",
+                "reference": "4360f99b882291ad2f4b71dc4c2291be37e9603c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hardeepvicky/tech-formation-php/zipball/4360f99b882291ad2f4b71dc4c2291be37e9603c",
+                "reference": "4360f99b882291ad2f4b71dc4c2291be37e9603c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TechFormation\\": "/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Php repo containing basic functionality used in mostly php projects",
+            "time": "2017-02-09T11:11:33+00:00"
+        },
+        {
+            "name": "unisharp/laravel-ckeditor",
+            "version": "4.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/UniSharp/laravel-ckeditor.git",
+                "reference": "39a62df1383671327ac908177c7a3b68ea95be6e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/UniSharp/laravel-ckeditor/zipball/39a62df1383671327ac908177c7a3b68ea95be6e",
+                "reference": "39a62df1383671327ac908177c7a3b68ea95be6e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Unisharp\\Ckeditor\\": "./"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+",
+                "LGPL-2.1+",
+                "MPL-1.1+"
+            ],
+            "authors": [
+                {
+                    "name": "CKSource",
+                    "homepage": "http://cksource.com"
+                },
+                {
+                    "name": "UniSharp Ltd. (Composer Package Maintainer)",
+                    "homepage": "http://www.unisharp.com"
+                }
+            ],
+            "description": "JavaScript WYSIWYG web text editor (for laravel).",
+            "homepage": "http://ckeditor.com",
+            "keywords": [
+                "CKEditor",
+                "editor",
+                "fckeditor",
+                "html",
+                "javascript",
+                "laravel",
+                "richtext",
+                "text",
+                "wysiwyg"
+            ],
+            "time": "2017-02-03T17:31:13+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v2.4.0",
             "source": {
@@ -1934,7 +2066,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "tech-formation/php": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

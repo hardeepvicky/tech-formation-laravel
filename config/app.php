@@ -165,6 +165,7 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
+        Unisharp\Ckeditor\ServiceProvider::class,
         
         /*
          * Application Service Providers...

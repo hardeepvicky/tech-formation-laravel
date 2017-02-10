@@ -21,6 +21,30 @@ return [
         ]
     ],
     [
+        "title" => "Email",
+        "icon_class" => "fa fa-user",
+        "links" => [
+            [
+                "title" => "Templates",
+                "route" => "email-template",
+                "other_routes" => [],
+                "icon_class" => "fa fa-navicon"
+            ],
+            [
+                "title" => "Placeholders",
+                "route" => "email-placeholder",
+                "other_routes" => [],
+                "icon_class" => "fa fa-navicon"
+            ],
+            [
+                "title" => "Logs",
+                "route" => "email-log",
+                "other_routes" => [],
+                "icon_class" => "fa fa-navicon"
+            ]
+        ]
+    ],
+    [
         "title" => "Logs",
         "icon_class" => "fa fa-link",
         "links" => [
@@ -35,7 +59,13 @@ return [
                 "route" => "log/cron",
                 "other_routes" => [],
                 "icon_class" => "fa fa-navicon"
-            ],            
+            ], 
+            [
+                "title" => "Email",
+                "route" => "log/email",
+                "other_routes" => [],
+                "icon_class" => "fa fa-navicon"
+            ], 
         ]
     ],
     
