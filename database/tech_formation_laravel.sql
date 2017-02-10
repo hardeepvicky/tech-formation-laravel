@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 03, 2017 at 05:53 AM
+-- Generation Time: Feb 10, 2017 at 06:43 AM
 -- Server version: 5.6.24-log
 -- PHP Version: 5.6.8
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `laravel_acl`
+-- Database: `tech_formation_laravel`
 --
 
 -- --------------------------------------------------------
@@ -28,13 +28,83 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `cron_logs` (
   `id` int(10) unsigned NOT NULL,
-  `type` int(3) NOT NULL,
+  `type` int(3) NOT NULL DEFAULT '0',
   `description` text,
   `status` tinyint(1) NOT NULL,
   `execution_time` float NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `email_logs`
+--
+
+CREATE TABLE IF NOT EXISTS `email_logs` (
+  `id` int(11) NOT NULL,
+  `from_email` varchar(100) NOT NULL,
+  `to_email` varchar(100) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `body` text NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `email_logs`
+--
+
+INSERT INTO `email_logs` (`id`, `from_email`, `to_email`, `subject`, `body`, `created_at`) VALUES
+(1, 'hardeepvicky1@gmail.com', 'hardeep.singh417@gmail.com', 'Welcome', '<h1> Hi, [User.name] </h1>\r\n<p>\r\n<b>Username : </b> [User.email]\r\n<b>Password : </b> 1245678\r\n</p>', '2017-02-09 07:56:37'),
+(2, 'hardeepvicky1@gmail.com', 'hardeep.singh417@gmail.com', 'Welcome', '<h1>Hi, Hardeep</h1>\r\n\r\n<p><strong>Username : </strong> hardeepvicky1@gmail.com <strong>Password : </strong> 1245678</p>\r\n', '2017-02-09 12:09:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `email_placeholders`
+--
+
+CREATE TABLE IF NOT EXISTS `email_placeholders` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `email_placeholders`
+--
+
+INSERT INTO `email_placeholders` (`id`, `name`) VALUES
+(3, 'Company.name'),
+(1, 'User.email'),
+(2, 'User.name'),
+(4, 'User.password');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `email_templates`
+--
+
+CREATE TABLE IF NOT EXISTS `email_templates` (
+  `id` int(11) NOT NULL,
+  `code` varchar(20) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `body` text NOT NULL,
+  `placeholder_ids` varchar(100) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `created_by` int(11) DEFAULT NULL,
+  `updated_at` datetime NOT NULL,
+  `updated_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `email_templates`
+--
+
+INSERT INTO `email_templates` (`id`, `code`, `subject`, `body`, `placeholder_ids`, `created_at`, `created_by`, `updated_at`, `updated_by`) VALUES
+(2, 'A001', 'Welcome', '<h1>Hi, [User.name]</h1>\r\n\r\n<p><strong>Username : </strong> [User.email] <strong>Password : </strong> [User.password]</p>\r\n', '1,2,4', '2017-02-09 06:00:54', 1, '2017-02-09 12:07:58', 1),
+(3, 'A002', 'Welcome', '<h1> Hi, [User.name] </h1>\r\n<p>\r\n<b>Username : </b> [User.email]\r\n<b>Password : </b> [User.password]\r\n</p>', '4', '2017-02-09 06:00:54', 1, '2017-02-09 06:00:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -46,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `id` int(10) unsigned NOT NULL,
   `name` varchar(80) NOT NULL,
   `type` varchar(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `permissions`
@@ -88,7 +158,26 @@ INSERT INTO `permissions` (`id`, `name`, `type`) VALUES
 (33, 'user/password/update', 'PUT'),
 (34, 'web-service/login', 'POST'),
 (35, 'log/web-service', 'GET'),
-(36, 'log/cron', 'GET');
+(36, 'log/cron', 'GET'),
+(37, 'email-placeholder', 'GET'),
+(38, 'email-placeholder/create', 'GET'),
+(39, 'email-placeholder', 'POST'),
+(40, 'email-placeholder/{email_placeholder}', 'GET'),
+(41, 'email-placeholder/{email_placeholder}/edit', 'GET'),
+(42, 'email-placeholder/{email_placeholder}', 'PUT'),
+(43, 'email-placeholder/{email_placeholder}', 'PATCH'),
+(44, 'email-placeholder/{email_placeholder}', 'DELETE'),
+(45, 'email-template', 'GET'),
+(46, 'email-template/create', 'GET'),
+(47, 'email-template', 'POST'),
+(48, 'email-template/{email_template}', 'GET'),
+(49, 'email-template/{email_template}/edit', 'GET'),
+(50, 'email-template/{email_template}', 'PUT'),
+(51, 'email-template/{email_template}', 'PATCH'),
+(52, 'email-template/{email_template}', 'DELETE'),
+(53, 'email-log', 'GET'),
+(54, 'log/email', 'GET'),
+(55, 'test_send_email', 'GET');
 
 -- --------------------------------------------------------
 
@@ -122,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `role_permissions` (
   `id` int(10) unsigned NOT NULL,
   `role_id` int(10) unsigned NOT NULL,
   `permission_id` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `role_permissions`
@@ -165,18 +254,37 @@ INSERT INTO `role_permissions` (`id`, `role_id`, `permission_id`) VALUES
 (34, 1, 34),
 (35, 1, 35),
 (36, 1, 36),
-(37, 3, 23),
-(38, 3, 32),
-(39, 3, 33),
-(40, 2, 23),
-(41, 2, 27),
-(42, 2, 28),
-(43, 2, 29),
-(44, 2, 31),
-(45, 2, 32),
-(46, 2, 33),
-(47, 2, 35),
-(48, 2, 36);
+(37, 1, 37),
+(38, 1, 38),
+(39, 1, 39),
+(40, 1, 40),
+(41, 1, 41),
+(42, 1, 42),
+(43, 1, 43),
+(44, 1, 44),
+(45, 1, 45),
+(46, 1, 46),
+(47, 1, 47),
+(48, 1, 48),
+(49, 1, 49),
+(50, 1, 50),
+(51, 1, 51),
+(52, 1, 52),
+(53, 1, 53),
+(54, 1, 54),
+(55, 1, 55),
+(56, 2, 23),
+(57, 2, 27),
+(58, 2, 28),
+(59, 2, 29),
+(60, 2, 31),
+(61, 2, 32),
+(62, 2, 33),
+(63, 2, 35),
+(64, 2, 36),
+(65, 3, 23),
+(66, 3, 32),
+(67, 3, 33);
 
 -- --------------------------------------------------------
 
@@ -206,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `first_name`, `last_name`, `email`, `password`, `remember_token`, `is_active`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
-(1, 1, 'Admin', '', 'admin@gmail.com', '$2y$10$9YKvMn2xfP7wt8rIoWHiPOvWxtG.q6I4LvbO2mYjBU3/mADVYudHW', 'z4tEFSD48CBhF2oyFD3ZRNOd0KUMTmoQmytfHA5BLhryrgq3n7AKPHSPVG2U', 1, '2017-02-02 05:44:58', NULL, '2017-02-02 11:48:59', 1, NULL, NULL),
+(1, 1, 'Admin', '', 'admin@gmail.com', '$2y$10$9YKvMn2xfP7wt8rIoWHiPOvWxtG.q6I4LvbO2mYjBU3/mADVYudHW', 'PJeJTD5LarCBHBCo7EGXt1oTGK1ojJjnfz4HOgl61qY14bKM4jXbYFespInd', 1, '2017-02-02 05:44:58', NULL, '2017-02-10 03:57:26', 1, NULL, NULL),
 (2, 2, 'sub', 'admin', 'sub-admin@gmail.com', '$2y$10$TlWFFIGbKa36vDYOfixNyeQIrVoNJeairJ/3rKyERcmHgceFJRsdS', 'ywWmvHNmOBcIXaplxnZTsPZqvX9rrR3UZZ31jx5QbJZyxYzsOXkrhNbq9liz', 1, '2017-02-02 08:06:54', 1, '2017-02-03 04:15:11', 2, NULL, NULL),
 (3, 3, 'staff', '', 'staff@gmail.com', '$2y$10$LEmoKfqHoO./pOg8HR8q/OY/hhMyGtQCcuc4QaIYhN4hh9XVflcEu', 'p4TGwXAbBGNI6vADgccKDrmM7bmfvyfQsJS5uVpdwPFP6Iy9WB7CS79vLwVi', 1, '2017-02-02 12:06:09', 1, '2017-02-03 04:38:54', 2, NULL, NULL);
 
@@ -218,29 +326,20 @@ INSERT INTO `users` (`id`, `role_id`, `first_name`, `last_name`, `email`, `passw
 
 CREATE TABLE IF NOT EXISTS `web_service_logs` (
   `id` int(10) unsigned NOT NULL,
-  `type` int(3) NOT NULL,
+  `type` int(3) NOT NULL DEFAULT '0',
   `request` text NOT NULL,
   `response` text,
-  `status` tinyint(1) NOT NULL,
-  `execution_time` float NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=latin1;
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `execution_time` float NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `web_service_logs`
 --
 
-INSERT INTO `web_service_logs` (`id`, `type`, `request`, `response`, `status`, `execution_time`, `created_at`, `updated_at`) VALUES
-(98, 1, '{"username":"vssakthivel","password":"abtit123"}', '{"msg":"","status":1,"data":{"api_token":"d43b9816fd9b91131ca89ebf94d9b3f0ea95b5fad43b9816fd9b91131ca8"}}', 1, 0.486, '2017-01-30 09:44:35', '2017-01-30 09:44:35'),
-(140, 1, '{"username":"vssakthivel","password":"abtit123"}', '{"msg":"SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''contain'' at line 1","status":0}', 0, 0.377, '2017-01-30 12:54:53', '2017-01-30 12:54:54'),
-(141, 1, '{"username":"vssakthivel","password":"abtit123"}', NULL, 0, 0, '2017-01-30 12:55:37', '0000-00-00 00:00:00'),
-(142, 1, '{"username":"vssakthivel","password":"abtit123"}', '{"msg":"","status":1,"data":{"api_token":"d43b9816fd9b91131ca89ebf94d9b3f0ea95b5fad43b9816fd9b91131ca8"}}', 1, 0.181, '2017-01-30 12:55:53', '2017-01-30 12:55:53'),
-(143, 1, '{"username":"vssakthivel","password":"abtit123"}', '{"msg":"","status":1,"data":{"api_token":"d43b9816fd9b91131ca89ebf94d9b3f0ea95b5fad43b9816fd9b91131ca8","group_id":"3","plant_id":"7"}}', 1, 0.172, '2017-01-30 12:57:36', '2017-01-30 12:57:36'),
-(144, 1, '{"username":"vssakthivel","password":"abtit123"}', '{"msg":"","status":1,"data":{"api_token":"d43b9816fd9b91131ca89ebf94d9b3f0ea95b5fad43b9816fd9b91131ca8","group_id":"3","plant_id":"7"}}', 1, 0.177, '2017-01-30 14:51:38', '2017-01-30 14:51:38'),
-(145, 1, '{"username":"vssakthivel","password":"abtit123"}', '{"msg":"","status":1,"data":{"api_token":"d43b9816fd9b91131ca89ebf94d9b3f0ea95b5fad43b9816fd9b91131ca8","group_id":"3","plant_id":"7"}}', 1, 1.137, '2017-01-30 16:29:13', '2017-01-30 16:29:14'),
-(146, 1, '{"username":"vssakthivel","password":"abtit123"}', '{"msg":"","status":1,"data":{"api_token":"d43b9816fd9b91131ca89ebf94d9b3f0ea95b5fad43b9816fd9b91131ca8","group_id":"3","plant_id":"7"}}', 1, 0.255, '2017-01-30 17:28:39', '2017-01-30 17:28:40'),
-(151, 1, '{"username":"vssakthivel","password":"abtit123"}', '{"msg":"","status":1,"data":{"api_token":"d43b9816fd9b91131ca89ebf94d9b3f0ea95b5fad43b9816fd9b91131ca8","group_id":"3","plant_id":"7"}}', 1, 0.234, '2017-01-31 11:21:04', '2017-01-31 11:21:04');
+INSERT INTO `web_service_logs` (`id`, `type`, `request`, `response`, `status`, `execution_time`, `created_at`) VALUES
+(1, 1, '{"email":"admin@gmail.com","password":"admin","service":"login"}', '{"msg":"Success","status":1,"data":{"role_id":1,"first_name":"Admin","last_name":"","email":"admin@gmail.com","remember_token":"PJeJTD5LarCBHBCo7EGXt1oTGK1ojJjnfz4HOgl61qY14bKM4jXbYFespInd"}}', 1, 0.169, '2017-02-10 05:03:36');
 
 --
 -- Indexes for dumped tables
@@ -250,6 +349,24 @@ INSERT INTO `web_service_logs` (`id`, `type`, `request`, `response`, `status`, `
 -- Indexes for table `cron_logs`
 --
 ALTER TABLE `cron_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `email_logs`
+--
+ALTER TABLE `email_logs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `email_placeholders`
+--
+ALTER TABLE `email_placeholders`
+  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `email_templates`
+--
+ALTER TABLE `email_templates`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -292,10 +409,25 @@ ALTER TABLE `web_service_logs`
 ALTER TABLE `cron_logs`
   MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `email_logs`
+--
+ALTER TABLE `email_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `email_placeholders`
+--
+ALTER TABLE `email_placeholders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `email_templates`
+--
+ALTER TABLE `email_templates`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=56;
 --
 -- AUTO_INCREMENT for table `roles`
 --
@@ -305,7 +437,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `role_permissions`
 --
 ALTER TABLE `role_permissions`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=68;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -315,7 +447,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `web_service_logs`
 --
 ALTER TABLE `web_service_logs`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=152;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
