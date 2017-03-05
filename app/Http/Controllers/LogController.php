@@ -14,7 +14,7 @@ use App\EmailLog;
 
 class LogController extends AppController
 {    
-    public $modelName = "Log", $routePrefix = "log";
+    public $modelName = "", $routePrefix = "log";
 
     /**
      * @return type
@@ -47,7 +47,7 @@ class LogController extends AppController
             1 => "Login"
         );
         
-        return $this->view(null, compact("summary", "web_service_types"));
+        return $this->view('Log.web_service', compact("summary", "web_service_types"));
     }
     
     /**
@@ -79,7 +79,7 @@ class LogController extends AppController
             1 => "Email"
         ];
         
-        return $this->view(null, compact("summary", "cron_types"));
+        return $this->view('Log.cron', compact("summary", "cron_types"));
     }
     
     /**
@@ -106,6 +106,6 @@ class LogController extends AppController
         
         $summary = $model->sortable()->paginate($this->pagination["limit"]);
         
-        return $this->view(null, compact("summary"));
+        return $this->view('Log.email_log', compact("summary"));
     }
 }

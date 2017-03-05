@@ -27,12 +27,12 @@ $records = $summary->toArray()["data"];
                 </div>
                 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Type</label>
+                    <label class="col-md-2 control-label">From Date</label>
                     <div class="col-md-3">
                         {!! Form::myInput("text", "from_date", ['id' => 'from-date', 'class' => 'datepicker', 'data-datepicker-end' => 'input#to-date']) !!}
                     </div>
                     
-                    <label class="col-md-2 control-label">Status</label>
+                    <label class="col-md-2 control-label">To Date</label>
                     <div class="col-md-3">
                         {!! Form::myInput("text", "from_date", ['id' => 'to-date', 'class' => 'datepicker', 'data-datepicker-start' => 'input#from-date']) !!}
                     </div>
