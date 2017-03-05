@@ -1,11 +1,4 @@
 <?php
-//Routes for Web Services
-
-Route::group(['middleware' => ['api']], function() 
-{
-    Route::post('web-service/login', 'WebServiceController@Login');
-});
-
 //Home Page
 Route::get("/", function ()
 {
