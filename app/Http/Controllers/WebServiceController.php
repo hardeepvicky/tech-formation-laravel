@@ -66,6 +66,8 @@ class WebServiceController extends Controller
      */
     public function login()
     {
+        $this->requestData = Input::all();
+        
         $data = [
             'email' => $this->requestData['email'],
             'password' => $this->requestData['password'],
@@ -75,14 +77,7 @@ class WebServiceController extends Controller
         if (Auth::attempt($data, true))
         {
             $user = Auth::user();
-            
-            return [
-                "role_id" =>  $user['role_id'],
-                "first_name" =>  $user['first_name'],
-                "last_name" =>  $user['last_name'],
-                "email" =>  $user['email'],
-                "remember_token" =>  $user['remember_token'],
-            ];
+            return $user;
         }
         else
         {
