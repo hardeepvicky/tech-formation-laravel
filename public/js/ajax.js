@@ -43,3 +43,11 @@ $(document).on("click", ".ajax-toggle-status",function(event)
 
     return false;
 });
+
+$(doument).on("click", ".ajax-block a", function(e)
+{
+    alert(this.href);
+    $(this).parents(".ajax-block").load($(this).attr("href"));
+    
+    return false;
+});

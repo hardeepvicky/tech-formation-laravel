@@ -10,7 +10,7 @@
     <div class="portlet-body form">
         
         {{ Form::open(array('url' => url($routePrefix), "class" => "form-horizontal")) }}
-            @include($modelName .".partial.form")
+            @include($routePrefix .".partial.form")
         {{ Form::close() }}
     </div>
 </div>

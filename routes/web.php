@@ -24,7 +24,7 @@ Route::group(['middleware' => "secure"], function ()
     Route::resource("user", "UserController");
     Route::get("user/{ID}/active/toggle/{v}", "UserController@toggle_active");
     Route::get("user/password/change", "UserController@change_password");
-    Route::put("user/password/update", "UserController@update_password");
+    Route::post("user/password/update", "UserController@update_password");
     
     Route::get("log/web-service", "LogController@web_service");
     Route::get("log/cron", "LogController@cron");

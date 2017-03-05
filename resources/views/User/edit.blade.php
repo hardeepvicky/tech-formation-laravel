@@ -9,7 +9,7 @@
 <div class="row">
     <div class="portlet-body form">
         {{ Form::model($model, array('url' => url($routePrefix . "/" . $model->id), 'method' => 'PUT', "class" => "form-horizontal")) }}
-            @include($modelName .".partial.form")
+            @include($routePrefix .".partial.form")
         {{ Form::close() }}
     </div>
 </div>

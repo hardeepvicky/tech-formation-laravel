@@ -198,7 +198,7 @@ class UserController extends AppController
         $model = User::findOrFail(Auth::id());
         
         $rules = [
-            "old_password" => "required",
+            "current_password" => "required",
             "password" => "required | confirmed | min:5",
             "password_confirmation" => "required",
         ];
@@ -207,12 +207,12 @@ class UserController extends AppController
         
         $validator = Validator::make(Input::all(), $rules);
         
-        if (!Hash::check(trim($input["old_password"]), $model->password))
+        if (!Hash::check(trim($input["current_password"]), $model->password))
         {
-            $validator->errors()->add('old_password', 'Wrong Password');
+            $validator->errors()->add('current_password', 'Wrong Password');
         }
 
-        if (trim($input["password"]) == trim($input["old_password"]))
+        if (trim($input["password"]) == trim($input["current_password"]))
         {
             $validator->errors()->add('password', "Don't enter password used earlier");
         }

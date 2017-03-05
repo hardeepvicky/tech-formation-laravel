@@ -24,7 +24,9 @@ class LogController extends AppController
         
         $where = $this->_getConditions([
             ["view_field" => "type"],
-            ["view_field" => "status"]
+            ["view_field" => "status"],
+            ["view_field" => "from_date", "op" => ">", "field" => "created_at", "type" => "date"],
+            ["view_field" => "to_date", "op" => "<", "field" => "created_at", "type" => "date"],
         ]);
         
         if ($where)

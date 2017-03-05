@@ -39,6 +39,8 @@ class Authenticate
             {
                 $list = Session::get(ACL_KEY);
                 
+                //debug($list); exit;
+                
                 if (!isset($list[$request->method()]))
                 {
                     return response('you are not permitted to access this page', 401);

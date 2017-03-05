@@ -20,7 +20,7 @@ class AppController extends Controller
     public $modelName = "", $routePrefix, $pageTitle = "Test-Laravel";
     
     public $pagination = array(
-        "limit" => 10,
+        "limit" => 5,
         "order" => array(
             "field" => "id",
             "dir" => "DESC"
