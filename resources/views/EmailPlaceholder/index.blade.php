@@ -8,7 +8,7 @@ $records = $summary->toArray()["data"];
 ?>
 <h3 class="page-title"> {{ $pageTitle }} </h3>
 
-@include('partial.breadcum', array("routePrefix" => $routePrefix, "action" => $action))
+@include('partial.breadcum')
 @include('partial.message')
 
 <div class="row">
