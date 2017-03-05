@@ -50,7 +50,7 @@ class AppController extends Controller
         
         if (!$view)
         {
-            $view = $this->modelName . "." . $action;
+            $view = $this->routePrefix . "." . $action;
         }
         
         $data["view"] = $view;
