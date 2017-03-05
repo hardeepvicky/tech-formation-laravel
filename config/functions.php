@@ -13,12 +13,12 @@ function debug($data)
 
 function memory_used() 
 {
-    if (!isset($GLOBALS['intial_memory']))
+    if (!defined ('LARAVEL_INITIAL_MEMORY'))
     {
         return 0;
     }
     
-    $mem = round((memory_get_peak_usage() - $GLOBALS['intial_memory'])/1024);
+    $mem = round((memory_get_peak_usage() - LARAVEL_INITIAL_MEMORY)/1024);
     
     if ($mem > 1024)
     {
@@ -36,12 +36,12 @@ function memory_used()
 
 function exec_time()
 {
-    if (!isset($GLOBALS['start_time']))
+    if (!defined ('LARAVEL_START'))
     {
         return 0;
     }
     
-    $time = microtime(true) - $GLOBALS['start_time'];
+    $time = microtime(true) - LARAVEL_START;
     
     if ($time > 100)
     {

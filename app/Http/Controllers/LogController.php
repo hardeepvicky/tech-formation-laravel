@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 use App\WebServiceLog;
 use App\CronLog;
+use App\EmailLog;
 
 class LogController extends AppController
 {    
@@ -20,6 +21,8 @@ class LogController extends AppController
      */
     public function web_service()
     {
+        $this->modelName = "WebServiceLog";
+        
         $this->pageTitle = "Web Service Log Summary";
         
         $where = $this->_getConditions([
@@ -44,7 +47,7 @@ class LogController extends AppController
             1 => "Login"
         );
         
-        return $this->view(null, compact("summary", "web_service_types"));
+        return $this->view('Log.web_service', compact("summary", "web_service_types"));
     }
     
     /**
@@ -52,6 +55,7 @@ class LogController extends AppController
      */
     public function cron()
     {
+        $this->modelName = "CronLog";
         $this->pageTitle = "Cron Log Summary";
         
         $where = $this->_getConditions([
@@ -75,6 +79,33 @@ class LogController extends AppController
             1 => "Email"
         ];
         
-        return $this->view(null, compact("summary", "cron_types"));
+        return $this->view('Log.corn', compact("summary", "cron_types"));
+    }
+    
+    /**
+     * @return type
+     */
+    public function email_log()
+    {
+        $this->modelName = "EmailLog";
+        $this->pageTitle = "Email Log Summary";
+        
+        $where = $this->_getConditions([
+            ["view_field" => "email", 'type' => 'string', "field" => ['from_email', 'to_email', 'subject', 'body']],
+            ["view_field" => "status"]
+        ]);
+        
+        if ($where)
+        {
+            $model = EmailLog::whereRaw($where);            
+        }
+        else
+        {
+            $model = new EmailLog();
+        }
+        
+        $summary = $model->sortable()->paginate($this->pagination["limit"]);
+        
+        return $this->view('Log.email_log', compact("summary"));
     }
 }

@@ -5,6 +5,10 @@ use Permission;
 
 class Role extends AppModel 
 {
+    public $timestamps = false;
+    
+    protected $createdBy = true, $updatedBy = true, $deletedBy = false, $createdAt = true, $updatedAt = true;
+    
     protected $fillable = ['name'];
     
     public $sortable = ['name'];

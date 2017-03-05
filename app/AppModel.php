@@ -4,7 +4,7 @@ use \Illuminate\Support\Facades\Auth;
 
 abstract class AppModel extends \Illuminate\Database\Eloquent\Model
 {
-    use \Kyslik\ColumnSortable\Sortable;
+    use \Kyslik\ColumnSortable\Sortable;    
     
     public static $snakeAttributes = false, $authUser = [];
     
@@ -12,6 +12,8 @@ abstract class AppModel extends \Illuminate\Database\Eloquent\Model
     protected $dateFormat = "Y-m-d H:i:s";
     
     protected $children = [], $parents = [];
+    
+    protected $createdBy = true, $updatedBy = true, $deletedBy = true, $createdAt = true, $updatedAt = true;
 
     /**
      * Listen for event
@@ -51,18 +53,24 @@ abstract class AppModel extends \Illuminate\Database\Eloquent\Model
     {
         if ($this->exists)
         {
-            $this->setAttribute(self::UPDATED_AT, date($this->dateFormat));
-        
-            if (isset(self::$authUser["id"]))
+            if ($this->updatedAt)
+            {
+                $this->setAttribute(self::UPDATED_AT, date($this->dateFormat));
+            }
+
+            if ($this->updatedBy && isset(self::$authUser["id"]))
             {
                 $this->setAttribute("updated_by", self::$authUser["id"]);
             }
         }
         else
         {
-            $this->setAttribute(self::CREATED_AT, date($this->dateFormat));
-        
-            if (isset(self::$authUser["id"]))
+            if ($this->createdAt)
+            {
+                $this->setAttribute(self::CREATED_AT, date($this->dateFormat));
+            }
+
+            if ($this->createdBy && isset(self::$authUser["id"]))
             {
                 $this->setAttribute("created_by", self::$authUser["id"]);
             }
@@ -87,7 +95,7 @@ abstract class AppModel extends \Illuminate\Database\Eloquent\Model
             }
         }
         
-        if (in_array("SoftDeletes", class_uses($this)))
+        if ($this->deletedBy && in_array("SoftDeletes", class_uses($this)))
         {
             if (isset(self::$authUser["id"]))
             {

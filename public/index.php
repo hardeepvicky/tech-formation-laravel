@@ -1,7 +1,4 @@
 <?php
-$GLOBALS['intial_memory'] = memory_get_peak_usage();
-$GLOBALS['start_time'] = microtime(true);
-
 /**
  * Laravel - A PHP Framework For Web Artisans
  *

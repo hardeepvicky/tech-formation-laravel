@@ -1,6 +1,6 @@
 <?php
-
 define('LARAVEL_START', microtime(true));
+define("LARAVEL_INITIAL_MEMORY",  memory_get_peak_usage());
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +15,8 @@ define('LARAVEL_START', microtime(true));
 */
 
 require __DIR__.'/../vendor/autoload.php';
+
+require __DIR__.'/../vendor/tech-formation/php/DateTime/DateUtility.php';
 
 /*
 |--------------------------------------------------------------------------

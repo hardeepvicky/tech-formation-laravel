@@ -87,8 +87,12 @@ Form::macro('myInput', function($type, $name, $attr = [], $errors = null)
     
     switch(strtolower($type))
     {
-        case "text":
+        case "text": 
             $html = Form::text($name, $value, $attr);
+            break;
+        
+        case "textarea":
+            $html = Form::textarea($name, $value, $attr);
             break;
         
         case 'select' :
